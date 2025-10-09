@@ -12,10 +12,10 @@ public class UserBean implements Serializable {
 	private String password;
 
 	//コンストラクタ
-	UserBean() {
+	public UserBean() {
 	}
 
-	UserBean(String id, String password, String name, String address) {
+	public UserBean(String id, String password, String name, String address) {
 		id = id;
 		password = password;
 		name = name;
