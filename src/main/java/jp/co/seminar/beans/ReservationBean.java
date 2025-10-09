@@ -18,11 +18,11 @@ public class ReservationBean implements Serializable{
 	}
 
 	public ReservationBean(String roomId, String date, String start, String end, String userId) {
-		roomId = roomId;
-		date = date;
-		start = start;
-		end = end;
-		userId = userId;
+		this.roomId = roomId;
+		this.date = date;
+		this.start = start;
+		this.end = end;
+		this.userId = userId;
 	}
 
 	//メソッド
@@ -57,7 +57,7 @@ public class ReservationBean implements Serializable{
 	//デバッグ用
 	@Override
 	public String toString() {
-		return "利用日:" + date + "利用終了時刻:" + end + "予約番号:" + id + "会議室ID:" + roomId+"利用開始時刻:"+start+"利用者ID:"+userId;
+		return "利用日:" + date + "\n利用終了時刻:" + end + "\n予約番号:" + id + "\n会議室ID:" + roomId+"\n利用開始時刻:"+start+"\n利用者ID:"+userId;
 	
 }
 }

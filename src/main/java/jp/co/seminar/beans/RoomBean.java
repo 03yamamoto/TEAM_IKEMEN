@@ -30,7 +30,7 @@ public class RoomBean implements Serializable{
 	//デバッグ用
 	@Override
 	public String toString() {
-		return "ID:" + id + "名前:" + name;
+		return "ID:" + id + "\n名前:" + name;
 
 	}
 }
