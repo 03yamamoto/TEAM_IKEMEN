@@ -79,6 +79,7 @@ public class MeetingRoom implements Serializable {
 		return 0;
 	}
 
+	//テスト用処理
 	@Override
 	public String toString() {
 		return "利用日:" + date + "\n会議室:" + rooms + "\n利用者:" + user;
