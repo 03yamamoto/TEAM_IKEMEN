@@ -1,6 +1,9 @@
 package jp.co.seminar.beans;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
+import jp.co.seminar.dao.ReservationDao;
 
 public class MeetingRoom implements Serializable {
 
@@ -21,7 +24,23 @@ public class MeetingRoom implements Serializable {
 	//メソッド
 	//会議室予約情報で会議室の予約をキャンセルする
 	public void cancel(ReservationBean reservation) {
-		//キャンセル処理
+		//予約情報が入っているかの確認
+		if (reservation == null) {
+			throw new Exception("キャンセルする予約情報がありません");
+		}
+		//キャンセル処理 あとは現在日時より予約日時が上回った場合の例外処理
+		if (!(ReservationDao.delete(reservation))) {
+			throw new Exception("この予約はすでにキャンセルされています。");
+		}
+		// 現在日時を取得
+		LocalDateTime nowTime = LocalDateTime.now();
+		// 予約日時を組み立てる
+		LocalDateTime reservationDateTime = LocalDateTime.parse(
+				reservation.getDate() + "T" + reservation.getStart());//Tで日時と日付をくっつけている
+		if (reservationDateTime.isBefore(nowTime)) {
+			throw new Exception("過去の予約はキャンセルできません。");
+		}
+
 	}
 
 	//予約日で会議室と時間帯を指定した会議室予約情報を生成
@@ -54,27 +73,41 @@ public class MeetingRoom implements Serializable {
 	public UserBean getUser() {
 		return user;
 	}
-	
+
 	//会議室予約システムにログインしているかの結果を返す
-	public boolean login(String id,String password) {
-		UserBean roomLogin = UserDAO.certificate(id,password);
-		if(roomLogin !=null){
-		return true;
-		} return false;
+	public boolean login(String id, String password) {
+		UserBean roomLogin = UserDAO.certificate(id, password);
+		if (roomLogin != null) {
+			return true;
+		}
+		return false;
 	}
-	
+
 	//会議室予約情報で会議室Daoを利用し、予約
 	public void reserve(ReservationBean reservation) {
 		//予約処理
 	}
-	
+
 	//roomIdの会議室が配列に格納されている添字を返す
-	private int roomIndex(String roomId){
-		return;//処理
-	}	
+	private int roomIndex(String roomId) {
+		for (int i = 0; i < rooms.length; i++) {
+			if (rooms[i].equals(roomId)) {
+				return i;
+			}
+		}
+		// 見つからなかった場合は例外を投げる
+		throw new IndexOutOfBoundsException("会議室が存在しません");
+	}
+
 	//利用開始時刻に対応する利用時間帯の添え字を計算
 	private int startPeriod(String start) {
-		return 0;
+		for (int i = 0; i < PERIOD.length; i++) {
+			if (PERIOD[i].equals(start)) {
+				return i;
+			}
+		}
+		// 見つからなかった場合は例外を投げる
+		throw new IndexOutOfBoundsException("指定された時刻が時間帯に存在しません: " + start);
 	}
 
 	@Override
