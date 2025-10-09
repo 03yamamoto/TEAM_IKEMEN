@@ -12,14 +12,14 @@ public class UserBean implements Serializable {
 	private String password;
 
 	//コンストラクタ
-	UserBean() {
+	public UserBean() {
 	}
 
-	UserBean(String id, String password, String name, String address) {
-		id = id;
-		password = password;
-		name = name;
-		address = address;
+	public UserBean(String id, String password, String name, String address) {
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.address = address;
 	}
 
 	//メソッド
@@ -42,7 +42,7 @@ public class UserBean implements Serializable {
 	//デバッグ用ToString
 	@Override
 	public String toString() {
-		return "アドレス:" + address + "ID:" + id + "名前:" + name + "パスワード:" + password;
+		return "アドレス:" + address + "\nID:" + id + "\n名前:" + name + "\nパスワード:" + password;
 	}
 
 }
