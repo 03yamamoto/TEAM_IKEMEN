@@ -2,6 +2,7 @@ package jp.co.seminar.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,8 +28,8 @@ public class ReserveServlet extends HttpServlet {
 		String nextPage;
 		String errorReason;
 		try {
-			Meetingroom meetingroom = (Meetingroom) session.getAttribute("meetingroom");
-			meetingroom.reserve((ReservationBean)session.getAttribute("resevation"));
+			MeetingRoom meetingroom = (MeetingRoom) session.getAttribute("meetingroom");
+			meetingroom.reserve = ((ReservationBean)session.getAttribute("resevation"));
 			nextPage = request.getContextPath() + "/reserved.jsp";
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -47,6 +48,9 @@ public class ReserveServlet extends HttpServlet {
 			errorReason = e.getMessage();
 			nextPage = "/reserverror.jsp";
 		}
+		request.setAttribute("errorReason", errorReason);
+		RequestDispatcher rd = request.getRequestDispatcher(nextPage);
+		rd.forward(request, response);
 	}
 
 	

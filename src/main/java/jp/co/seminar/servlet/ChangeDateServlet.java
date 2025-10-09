@@ -43,7 +43,7 @@ public class ChangeDateServlet extends HttpServlet {
 		try {
 			String date = request.getParameter("date");
 			String page = request.getParameter("page");
-			Meetingroom meetingroom = (Meetingroom) session.getAttribute("meetingroom");
+			MeetingRoom meetingroom = (MeetingRoom) session.getAttribute("meetingroom");
 			meetingroom.getDate(date);
 			nextPage = request.getContextPath() + "/" + page;
 			

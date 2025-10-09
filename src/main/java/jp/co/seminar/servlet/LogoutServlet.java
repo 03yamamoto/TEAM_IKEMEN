@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/ReserveCreateServlet")
-public class ReserveCreateServlet extends HttpServlet {
+@WebServlet("/LogoutServlet")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public ReserveCreateServlet() {
+    public LogoutServlet() {
         super();
         
     }
@@ -36,32 +36,12 @@ public class ReserveCreateServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		String nextPage;
-		try {
-		String roomId = request.getParameter("roomId");
-		String time = request.getParameter("time");
-		MeetingRoom meetingroom = (MeetingRoom) session.getAttribute("meetingroom");
-		RoomBean roomBean = meetingroom.getroom(roomId);
-		ReservationBean resevationBean = meetingroom.createResevation(roomId,time);
-			session.setAttribute("room", roomBean);
-			session.setAttribute("resevation", resevationBean);
-			nextPage = request.getContextPath() + "/reseved.jsp";
-		}catch (ServletException e) {
-			e.printStackTrace();
-			System.err.println("リクエスト処理エラー");
-			nextPage = request.getContextPath() + "/reseved.jsp";
-			
-		}catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("入出力処理エラー");
-			nextPage = request.getContextPath() + "/reseved.jsp";
-		}
+		session.invalidate();
+		String nextPage = request.getContextPath() + "/login.jsp";
 		response.sendRedirect(nextPage);
 		return;
-	}
 		
-	
+	}
 
 }

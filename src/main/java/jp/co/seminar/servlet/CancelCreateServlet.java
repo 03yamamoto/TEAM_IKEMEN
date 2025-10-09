@@ -41,11 +41,11 @@ public class CancelCreateServlet extends HttpServlet {
 		try {
 		String roomId = request.getParameter("roomId");
 		String time = request.getParameter("time");
-		Meetingroom meetingroom = (Meetingroom) session.getAttribute("meetingroom");
+		MeetingRoom meetingroom = (MeetingRoom) session.getAttribute("meetingroom");
 		RoomBean roomBean = meetingroom.getroom(roomId);
 		ReservationBean resevationBean = meetingroom.createResevation(roomId,time);
-			session.setAttribute("cancelroomBean", roomBean);
-			session.setAttribute("cancelresevation", resevationBean);
+			session.setAttribute("room", roomBean);
+			session.setAttribute("resevation", resevationBean);
 			nextPage = request.getContextPath() + "/cancelConfirm.jsp";
 		}catch (ServletException e) {
 			e.printStackTrace();
