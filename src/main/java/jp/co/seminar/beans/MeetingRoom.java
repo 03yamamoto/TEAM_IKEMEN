@@ -2,6 +2,8 @@ package jp.co.seminar.beans;
 
 import java.io.Serializable;
 
+import jp.co.seminar.dao.UserDao;
+
 public class MeetingRoom implements Serializable {
 
 	//フィールド
@@ -57,7 +59,7 @@ public class MeetingRoom implements Serializable {
 	
 	//会議室予約システムにログインしているかの結果を返す
 	public boolean login(String id,String password) {
-		UserBean roomLogin = UserDAO.certificate(id,password);
+		UserBean roomLogin = UserDao.certificate(id,password);
 		if(roomLogin !=null){
 		return true;
 		} return false;

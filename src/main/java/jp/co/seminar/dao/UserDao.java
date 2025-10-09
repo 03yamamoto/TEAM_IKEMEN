@@ -2,6 +2,8 @@ package jp.co.seminar.dao;
 
 import java.sql.Connection;
 
+import jp.co.seminar.beans.UserBean;
+
 public class UserDao {
 	//コンストラクタ
 	public UserDao() {}
@@ -15,4 +17,5 @@ public class UserDao {
 				){}
 	
 	}
+
 }
