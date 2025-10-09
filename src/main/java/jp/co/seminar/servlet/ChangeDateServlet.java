@@ -1,4 +1,4 @@
-
+package jp.co.seminar.servlet;
 
 import java.io.IOException;
 
@@ -7,15 +7,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/ChangeDateServlet")
+public class ChangeDateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public LoginServlet() {
+    public ChangeDateServlet() {
         super();
         
     }
@@ -32,31 +31,22 @@ public class LoginServlet extends HttpServlet {
 		}
 		response.sendRedirect(nextPage);
 		return;
-	}
+		}
+	
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
-		Meetingroom meetingroom;
+		
 		String nextPage;
-		
 		try {
-		String userId = request.getParameter("userId");
-		String userPw = request.getParameter("userPw");
-		
-//		ログイン処理をMeetingroomのloginメソッドを用いて行う
-		if (meetingroom.login(userId,userPw)) {
-			HttpSession session = request.getSession();
-			if (session.isNew()) {
-				session.setMaxInactiveInterval(60 * 15);
-				session.getAttribute("meetingroom",meetingroom);
-			}
-			nextPage = request.getContextPath() + "/menu.jsp";
-		}else {
-			nextPage = request.getContextPath() + "/login.jsp";
-		}
-		}catch (ServletException e) {
+			String date = request.getParameter("date");
+			String page = request.getParameter("page");
+			Meetingroom session = (Meetingroom) session.getAttribute("meetingroom");
+			session.getDate(date);
+			nextPage = request.getContextPath() + "/" + page;
+			
+		} catch (ServletException e) {
 			e.printStackTrace();
 			System.err.println("リクエスト処理エラー");
 			nextPage = request.getContextPath() + "/login.jsp";
@@ -68,7 +58,6 @@ public class LoginServlet extends HttpServlet {
 		}
 		response.sendRedirect(nextPage);
 		return;
-		
 	}
 
 }
