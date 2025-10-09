@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/ReserveCreateServlet")
+public class ReserveCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public LoginServlet() {
+    public ReserveCreateServlet() {
         super();
         
     }
@@ -37,38 +37,31 @@ public class LoginServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
-		MeetingRoom meetingroom = new MeetingRoom();
+		HttpSession session = request.getSession();
 		String nextPage;
-		
 		try {
-		String userId = request.getParameter("userId");
-		String userPw = request.getParameter("userPw");
-		
-//		ログイン処理をMeetingroomのloginメソッドを用いて行う
-		if (meetingroom.login(userId,userPw)) {
-			HttpSession session = request.getSession();
-			if (session.isNew()) {
-				session.setMaxInactiveInterval(60 * 15);
-				session.getAttribute("meetingroom",meetingroom);
-			}
-			nextPage = request.getContextPath() + "/menu.jsp";
-		}else {
-			nextPage = request.getContextPath() + "/login.jsp";
-		}
+		String roomId = request.getParameter("roomId");
+		String time = request.getParameter("time");
+		MeetingRoom meetingroom = (MeetingRoom) session.getAttribute("meetingroom");
+		RoomBean roomBean = meetingroom.getroom(roomId);
+		ReservationBean resevationBean = meetingroom.createResevation(roomId,time);
+			session.setAttribute("room", roomBean);
+			session.setAttribute("resevation", resevationBean);
+			nextPage = request.getContextPath() + "/reseved.jsp";
 		}catch (ServletException e) {
 			e.printStackTrace();
 			System.err.println("リクエスト処理エラー");
-			nextPage = request.getContextPath() + "/login.jsp";
+			nextPage = request.getContextPath() + "/reseved.jsp";
 			
 		}catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("入出力処理エラー");
-			nextPage = request.getContextPath() + "/login.jsp";
+			nextPage = request.getContextPath() + "/reseved.jsp";
 		}
 		response.sendRedirect(nextPage);
 		return;
-		
 	}
+		
+	
 
 }

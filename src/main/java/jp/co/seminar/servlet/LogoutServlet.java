@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/ChangeDateServlet")
-public class ChangeDateServlet extends HttpServlet {
+@WebServlet("/LogoutServlet")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public ChangeDateServlet() {
+    public LogoutServlet() {
         super();
         
     }
@@ -32,33 +32,16 @@ public class ChangeDateServlet extends HttpServlet {
 		}
 		response.sendRedirect(nextPage);
 		return;
-		}
-	
+	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		String nextPage;
-		try {
-			String date = request.getParameter("date");
-			String page = request.getParameter("page");
-			MeetingRoom meetingroom = (MeetingRoom) session.getAttribute("meetingroom");
-			meetingroom.getDate(date);
-			nextPage = request.getContextPath() + "/" + page;
-			
-		} catch (ServletException e) {
-			e.printStackTrace();
-			System.err.println("リクエスト処理エラー");
-			nextPage = request.getContextPath() + "/login.jsp";
-			
-		}catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("入出力処理エラー");
-			nextPage = request.getContextPath() + "/login.jsp";
-		}
+		session.invalidate();
+		String nextPage = request.getContextPath() + "/login.jsp";
 		response.sendRedirect(nextPage);
 		return;
+		
 	}
 
 }
