@@ -2,8 +2,11 @@ package jp.co.seminar.beans;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import jp.co.seminar.dao.ReservationDao;
+import jp.co.seminar.dao.UserDao;
 
 public class MeetingRoom implements Serializable {
 
@@ -45,9 +48,19 @@ public class MeetingRoom implements Serializable {
 
 	//予約日で会議室と時間帯を指定した会議室予約情報を生成
 	public ReservationBean createReservation(String roomId, String start) {
-		return null; //処理
-	}
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+	    LocalTime startTime = LocalTime.parse(start, formatter);
+	    LocalTime endTime = startTime.plusMinutes(INTERVAL);
 
+	    String formattedStart = startTime.format(formatter);
+	    String formattedEnd = endTime.format(formatter);
+
+	    String date = this.getDate();
+	    String userId = this.getUser().getId(); 
+	    
+	    return new ReservationBean(roomId, date, formattedStart, formattedEnd, userId);
+	    
+	}
 	public String getDate() {
 		return date;
 	}
@@ -63,7 +76,21 @@ public class MeetingRoom implements Serializable {
 
 	//会議室予約システムの利用日における予約状況を返す
 	public ReservationBean[][] getReservations() {
-		return; //予約状況の処理が決まり次第追記
+	    RoomBean[] rooms = getRooms(); // 会議室一覧
+	    String[] times = getPeriod(); // 時間帯一覧
+
+	    ReservationBean[][] reservations = new ReservationBean[rooms.length][times.length];
+
+	    // ここで予約情報を埋める（例：予約リストから照合してセット）
+	    for (int i = 0; i < rooms.length; i++) {
+	        for (int j = 0; j < times.length; j++) {
+	            // 予約が存在するかチェック（仮のロジック）
+	            ReservationBean reservationCheck = findReservation(rooms[i].getRoomId(), getDate(), times[reservationCheck]);
+	            reservations[i][j] = r; // null なら空き、予約があればセット
+	        }
+	    }
+
+	    return reservations;
 	}
 
 	public RoomBean[] getRooms() {
@@ -76,7 +103,7 @@ public class MeetingRoom implements Serializable {
 
 	//会議室予約システムにログインしているかの結果を返す
 	public boolean login(String id, String password) {
-		UserBean roomLogin = UserDAO.certificate(id, password);
+		UserBean roomLogin = UserDao.certificate(id, password);
 		if (roomLogin != null) {
 			return true;
 		}
@@ -85,7 +112,13 @@ public class MeetingRoom implements Serializable {
 
 	//会議室予約情報で会議室Daoを利用し、予約
 	public void reserve(ReservationBean reservation) {
-		//予約処理
+		boolean success = ReservationDao.insert(reservation); // ReservationDaoがクラス名の例
+
+		if (success) {
+		    System.out.println("予約が追加されました！");
+		} else {
+		    System.out.println("予約の追加に失敗しました！");
+		}
 	}
 
 	//roomIdの会議室が配列に格納されている添字を返す
