@@ -83,13 +83,13 @@ public class MeetingRoom implements Serializable {
 	    ReservationBean[][] result = new ReservationBean[rooms.length][period.length];
 
 	    // 利用日の予約一覧を取得
-	    List<ReservationBean> reservationList = ReservationDao.findByDate(getDate());
+	    List<ReservationBean> reservationDate = ReservationDao.findByDate(getDate());
 
 	    for (int i = 0; i < rooms.length; i++) {
 	        String roomId = rooms[i].getId();
 	        for (int j = 0; j < period.length; j++) {
 	            String start = period[j];
-	            for (ReservationBean resavationList : reservationList) {
+	            for (ReservationBean resavationList : reservationDate) {
 	                if (resavationList.getRoomId().equals(roomId) &&
 	                		resavationList.getStart().equals(start)) {
 	                    result[i][j] = resavationList;
