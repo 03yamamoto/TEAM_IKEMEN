@@ -39,6 +39,12 @@ public class UserBean implements Serializable {
 		return password;
 	}
 
+	//新規ユーザー登録
+	public boolean newUser() {
+		
+		return newUser;
+	}
+	
 	//デバッグ用ToString
 	@Override
 	public String toString() {

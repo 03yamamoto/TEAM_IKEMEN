@@ -53,7 +53,7 @@ public class MeetingRoom implements Serializable {
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 	    LocalTime startTime = LocalTime.parse(start, formatter);
 	    LocalTime endTime = startTime.plusMinutes(INTERVAL);
-
+	    
 	    String formattedStart = startTime.format(formatter);
 	    String formattedEnd = endTime.format(formatter);
 
