@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.co.seminar.beans.MeetingRoom;
+import jp.co.seminar.beans.ReservationBean;
+import jp.co.seminar.beans.RoomBean;
+
 
 @WebServlet("/ReserveCreateServlet")
 public class ReserveCreateServlet extends HttpServlet {
@@ -44,7 +48,7 @@ public class ReserveCreateServlet extends HttpServlet {
 		String time = request.getParameter("time");
 		MeetingRoom meetingroom = (MeetingRoom) session.getAttribute("meetingroom");
 		RoomBean roomBean = meetingroom.getroom(roomId);
-		ReservationBean resevationBean = meetingroom.createResevation(roomId,time);
+		ReservationBean resevationBean = meetingroom.createReservation(roomId,time);
 			session.setAttribute("room", roomBean);
 			session.setAttribute("resevation", resevationBean);
 			nextPage = request.getContextPath() + "/reseved.jsp";

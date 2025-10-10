@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.co.seminar.beans.MeetingRoom;
+import jp.co.seminar.beans.ReservationBean;
+
 
 @WebServlet("/CancelServlet")
 public class CancelServlet extends HttpServlet {
@@ -39,22 +42,22 @@ public class CancelServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String nextPage;
-		String errorReason;
+		String errorReason = "";
 		try {
 			MeetingRoom meetingroom = (MeetingRoom) session.getAttribute("meetingroom");
-			meetingroom.cancel = ((ReservationBean)session.getAttribute("cancelresevation"));
+			meetingroom.cancel((ReservationBean)session.getAttribute("cancelresevation"));
 			nextPage = request.getContextPath() + "/canceled.jsp";
-		} catch (ServletException e) {
-			e.printStackTrace();
-			System.err.println("リクエスト処理エラー");
-			errorReason = "リクエスト処理エラー";
-			nextPage = "/cancelerror.jsp";
-			
-		}catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("入出力処理エラー");
-			errorReason = "入出力処理エラー";
-			nextPage = "/cancelerror.jsp";
+//		} catch (ServletException e) {
+//			e.printStackTrace();
+//			System.err.println("リクエスト処理エラー");
+//			errorReason = "リクエスト処理エラー";
+//			nextPage = "/cancelerror.jsp";
+//			
+//		}catch (IOException e) {
+//			e.printStackTrace();
+//			System.err.println("入出力処理エラー");
+//			errorReason = "入出力処理エラー";
+//			nextPage = "/cancelerror.jsp";
 		}catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
