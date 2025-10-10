@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.co.seminar.beans.MeetingRoom;
+import jp.co.seminar.beans.ReservationBean;
+
+
 
 @WebServlet("/ReserveServlet")
 public class ReserveServlet extends HttpServlet {
@@ -26,22 +30,22 @@ public class ReserveServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String nextPage;
-		String errorReason;
+		String errorReason="";
 		try {
 			MeetingRoom meetingroom = (MeetingRoom) session.getAttribute("meetingroom");
-			meetingroom.reserve = ((ReservationBean)session.getAttribute("resevation"));
+			meetingroom.reserve((ReservationBean)session.getAttribute("resevation"));
 			nextPage = request.getContextPath() + "/reserved.jsp";
-		} catch (ServletException e) {
-			e.printStackTrace();
-			System.err.println("リクエスト処理エラー");
-			errorReason = "リクエスト処理エラー";
-			nextPage = "/reserverror.jsp";
-			
-		}catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("入出力処理エラー");
-			errorReason = "入出力処理エラー";
-			nextPage = "/reserverror.jsp";
+//		} catch (ServletException e) {
+//			e.printStackTrace();
+//			System.err.println("リクエスト処理エラー");
+//			errorReason = "リクエスト処理エラー";
+//			nextPage = "/reserverror.jsp";
+//			
+//		}catch (IOException e) {
+//			e.printStackTrace();
+//			System.err.println("入出力処理エラー");
+//			errorReason = "入出力処理エラー";
+//			nextPage = "/reserverror.jsp";
 		}catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
