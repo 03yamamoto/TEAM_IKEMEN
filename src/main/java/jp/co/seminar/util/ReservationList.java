@@ -4,4 +4,4 @@ import java.util.ArrayList;
 
 import jp.co.seminar.beans.ReservationBean;
 
-public class MeetingList extends ArrayList<ReservationBean> {}
+public class ReservationList extends ArrayList<ReservationBean> {}

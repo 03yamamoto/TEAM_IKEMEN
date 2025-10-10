@@ -5,16 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import jp.co.seminar.util.MeetingroomConnectionProvider;
-
 import jp.co.seminar.beans.UserBean;
+import jp.co.seminar.util.MeetingroomConnectionProvider;
 
 public class UserDao {
 	//コンストラクタ
 	public UserDao() {}
 	//メソッド
 	public static UserBean certificate​(String id, String password) {
-		
+		UserBean ubean =null;
 		//データベース接続
 		String sql = "SELECT id,password FROM user WHERE id = ?, passwprd = ?";
 		//try-with-resources構文でリソースを自動的にクローズ
@@ -28,7 +27,9 @@ public class UserDao {
 			try(ResultSet rs = pstmt.executeQuery()){
 				String idd = rs.getString("id");
 				String pass = rs.getString("password");
-				UserBean uBean = new UserBean(idd,password);
+				String name = rs.getString("name");
+				String address = rs.getString("address");
+				ubean = new UserBean(idd,pass,name,address);
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -37,6 +38,7 @@ public class UserDao {
 			e.printStackTrace();
 			System.out.println("SQLに関するエラーです。");
 		}
-		return uBean;
+		return ubean;
+
 }
 }
