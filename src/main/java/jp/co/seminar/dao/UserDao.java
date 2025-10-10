@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import jp.co.seminar.util.MeetingroomConnectionProvider;
 
+import jp.co.seminar.beans.UserBean;
+
 public class UserDao {
 	//コンストラクタ
 	public UserDao() {}

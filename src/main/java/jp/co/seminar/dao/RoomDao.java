@@ -13,8 +13,6 @@ public class RoomDao {
 	public RoomDao() {}
 	//メソッド
 	public static RoomBean[] findAll​() {
-		String id;
-		MeetingList mList = new MeetingList();
 		//データベース接続
 		String sql = "SELECT * FROM room WHERE id = ?";
 		//try-with-resources構文でリソースを自動的にクローズ
@@ -22,7 +20,7 @@ public class RoomDao {
 			Connection conn = MeetingroomConnectionProvider.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql)){
 			//プレースホルダーに値を設定
-			pstmt.setString(1, id);
+			pstmt.setString(1, );
 			//SQL文を実行して結果を取得
 			try(ResultSet rs = pstmt.executeQuery()){
 				String id = rs.getString("id");
@@ -34,6 +32,6 @@ public class RoomDao {
 			e.printStackTrace();
 			System.out.println("SQLに関するエラーです。");
 		}
-		return mList;
+		return;
 }
 }
