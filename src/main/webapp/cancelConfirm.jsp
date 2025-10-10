@@ -36,6 +36,7 @@
 	<form action="<%=request.getContextPath() %>/cancelServlet" method="post">
 		<input type="submit" value="決定">
 	</form>	
-	
+
+
 </body>
 </html>
