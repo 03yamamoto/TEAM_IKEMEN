@@ -2,7 +2,7 @@ package jp.co.seminar.beans;
 
 import java.io.Serializable;
 
-public class ReservationBean implements Serializable{
+public class ReservationBean implements Serializable {
 
 	//フィールド
 	private static final long serialVersionUID = 1L;
@@ -17,6 +17,17 @@ public class ReservationBean implements Serializable{
 	public ReservationBean() {
 	}
 
+	//会議室予約情報を基に初期化
+	public ReservationBean(int id, String roomId, String date, String start, String end, String userId) {
+		this.id = id;
+		this.roomId = roomId;
+		this.date = date;
+		this.start = start;
+		this.end = end;
+		this.userId = userId;
+	}
+	
+	//予約番号以外の会議室予約情報を基に初期化
 	public ReservationBean(String roomId, String date, String start, String end, String userId) {
 		this.roomId = roomId;
 		this.date = date;
@@ -54,10 +65,12 @@ public class ReservationBean implements Serializable{
 		return start;
 	}
 
+	
 	//デバッグ用
 	@Override
 	public String toString() {
-		return "利用日:" + date + "\n利用終了時刻:" + end + "\n予約番号:" + id + "\n会議室ID:" + roomId+"\n利用開始時刻:"+start+"\n利用者ID:"+userId;
-	
-}
+		return "利用日:" + date + "\n利用終了時刻:" + end + "\n予約番号:" + id + "\n会議室ID:" + roomId + "\n利用開始時刻:" + start
+				+ "\n利用者ID:" + userId;
+
+	}
 }
