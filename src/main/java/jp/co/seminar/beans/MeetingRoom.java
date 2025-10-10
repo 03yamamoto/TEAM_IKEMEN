@@ -86,7 +86,7 @@ public class MeetingRoom implements Serializable {
 	        for (int j = 0; j < times.length; j++) {
 	            // 予約が存在するかチェック（仮のロジック）
 	            ReservationBean reservationCheck = findReservation(rooms[i].getRoomId(), getDate(), times[reservationCheck]);
-	            reservations[i][j] = r; // null なら空き、予約があればセット
+	            reservations[i][j] = reservationCheck; // null なら空き、予約があればセット
 	        }
 	    }
 

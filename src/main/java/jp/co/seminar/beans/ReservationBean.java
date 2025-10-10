@@ -65,6 +65,7 @@ public class ReservationBean implements Serializable {
 		return start;
 	}
 
+	
 	//デバッグ用
 	@Override
 	public String toString() {
