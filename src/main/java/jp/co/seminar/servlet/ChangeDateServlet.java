@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.co.seminar.beans.MeetingRoom;
+
 
 @WebServlet("/ChangeDateServlet")
 public class ChangeDateServlet extends HttpServlet {
@@ -40,23 +42,23 @@ public class ChangeDateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String nextPage;
-		try {
+//		try {
 			String date = request.getParameter("date");
 			String page = request.getParameter("page");
 			MeetingRoom meetingroom = (MeetingRoom) session.getAttribute("meetingroom");
-			meetingroom.getDate(date);
+			meetingroom.setDate(date);
 			nextPage = request.getContextPath() + "/" + page;
 			
-		} catch (ServletException e) {
-			e.printStackTrace();
-			System.err.println("リクエスト処理エラー");
-			nextPage = request.getContextPath() + "/login.jsp";
-			
-		}catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("入出力処理エラー");
-			nextPage = request.getContextPath() + "/login.jsp";
-		}
+//		} catch (ServletException e) {
+//			e.printStackTrace();
+//			System.err.println("リクエスト処理エラー");
+//			nextPage = request.getContextPath() + "/login.jsp";
+//			
+//		}catch (IOException e) {
+//			e.printStackTrace();
+//			System.err.println("入出力処理エラー");
+//			nextPage = request.getContextPath() + "/login.jsp";
+//		}
 		response.sendRedirect(nextPage);
 		return;
 	}
