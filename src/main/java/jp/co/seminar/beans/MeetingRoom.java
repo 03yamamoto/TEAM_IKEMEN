@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import jp.co.seminar.dao.ReservationDao;
+import jp.co.seminar.dao.RoomDao;
 import jp.co.seminar.dao.UserDao;
 
 public class MeetingRoom implements Serializable {
@@ -77,22 +79,45 @@ public class MeetingRoom implements Serializable {
 	//会議室予約システムの利用日における予約状況を返す
 	public ReservationBean[][] getReservations() {
 	    RoomBean[] rooms = getRooms(); // 会議室一覧
-	    String[] times = getPeriod(); // 時間帯一覧
+	    String[] period = getPeriod(); // 時間帯一覧
+	    ReservationBean[][] result = new ReservationBean[rooms.length][period.length];
 
-	    ReservationBean[][] reservations = new ReservationBean[rooms.length][times.length];
+	    // 利用日の予約一覧を取得
+	    List<ReservationBean> reservationList = ReservationDao.findByDate(getDate());
 
-	    // ここで予約情報を埋める（例：予約リストから照合してセット）
 	    for (int i = 0; i < rooms.length; i++) {
-	        for (int j = 0; j < times.length; j++) {
-	            // 予約が存在するかチェック（仮のロジック）
-	            ReservationBean reservationCheck = findReservation(rooms[i].getRoomId(), getDate(), times[reservationCheck]);
-	            reservations[i][j] = reservationCheck; // null なら空き、予約があればセット
+	        String roomId = rooms[i].getId();
+	        for (int j = 0; j < period.length; j++) {
+	            String start = period[j];
+	            for (ReservationBean resavationList : reservationList) {
+	                if (resavationList.getRoomId().equals(roomId) &&
+	                		resavationList.getStart().equals(start)) {
+	                    result[i][j] = resavationList;
+	                    break;
+	                }
+	            }
 	        }
 	    }
 
-	    return reservations;
+	    return result;
 	}
 
+	//会議室IDがroomIdの会議室を返す
+	public RoomBean getRoom(String roomId) {
+	    RoomBean[] rooms = RoomDao.findAll();
+	    if (rooms != null) {
+	        for (RoomBean room : rooms) {
+	            if (room.getId().equals(roomId)) {
+	                return room;
+	            }
+	        }
+	    }
+	    return null; // 見つからなかった場合
+	}
+	
+	
+
+	
 	public RoomBean[] getRooms() {
 		return rooms;
 	}
