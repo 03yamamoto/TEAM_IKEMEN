@@ -15,11 +15,12 @@ public class UserDao {
 	public static UserBean certificate​(String id, String password) {
 		UserBean ubean =null;
 		//データベース接続
-		String sql = "SELECT id,password FROM user WHERE id = ?, password = ?";
+		String sql = "SELECT * FROM user WHERE id = ? AND password = ?";
 		//try-with-resources構文でリソースを自動的にクローズ
-		try(
-			Connection conn = MeetingroomConnectionProvider.getConnection();
+		try(Connection conn = MeetingroomConnectionProvider.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql)){
+			System.out.println(id);
+			System.out.println(password);
 			//プレースホルダーに値を設定
 			pstmt.setString(1, id);
 			pstmt.setString(2, password);
