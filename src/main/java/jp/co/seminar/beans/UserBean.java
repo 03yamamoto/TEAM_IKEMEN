@@ -32,11 +32,11 @@ public class UserBean implements Serializable {
 	public UserBean(String id, String password, String name, String address) {
 		/**
 		 * 利用者情報を基に初期化します。
-		 *パラメータ<br>
-		 * @param id 利用者ID<br>
-		 * @param password パスワード<br>
-		 * @param name 氏名<br>
-		 * @param address 住所<br>
+		 *
+		 * @param id 利用者ID
+		 * @param password パスワード
+		 * @param name 氏名
+		 * @param address 住所
 		 */
 		this.id = id;
 		this.password = password;
@@ -44,23 +44,48 @@ public class UserBean implements Serializable {
 		this.address = address;
 	}
 	//メソッド
+	/**
+	 * 住所を返します。
+	 *
+	 * @return 住所
+	 */
 	public String getAddress() {
 		return address;
 	}
-
+	
+	/**
+	 * 利用者IDを返します。
+	 *
+	 * @return 利用者ID
+	 */
 	public String getId() {
 		return id;
 	}
-
+	
+	/**
+	 * 氏名を返します。
+	 *
+	 * @return 氏名
+	 */
 	public String getName() {
 		return name;
 	}
-
+	
+	/**
+	 * パスワードを返します。
+	 *
+	 * @return パスワード
+	 */
 	public String getPassword() {
 		return password;
 	}
 
 	//新規ユーザー登録
+	/**
+	 * 新規ユーザーを返します。
+	 *
+	 * @return 新規ユーザー
+	 */
 	public boolean newUser() {
 		
 		return newUser;
