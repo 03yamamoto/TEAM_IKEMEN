@@ -1,3 +1,5 @@
+<%@page import="jp.co.seminar.beans.RoomBean"%>
+<%@page import="jp.co.seminar.beans.MeetingRoom"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,28 +13,28 @@
 	<hr>
 	<h2>利用日</h2>
 		<form action="<%= request.getContextPath() %>/changeDateServlet" method="post">
-			<input type="date" name="date" value="<% meetingRoom.date %>">
+			<input type="date" name="date" value="${meetingRoom.date}">
 			<input type="hidden" name="page" value="reserveInput.jsp">
 			<input type="submit" value="日付変更">
 		</form>	
 			
-	<h2>予約可能時間帯（<%= meetingRoom.user.name %>）</h2>
+	<h2>予約可能時間帯（${meetingRoom.user.name}）</h2>
 	<table>
 		<tr>
-		<th>会議室名/時間帯</th>
-		<% for(int i=0;i<period.length;i++){%>
-		<th><%= period[i]%></th>
-		<% }%>
+			<th>会議室名/時間帯</th>
+			<%  String[] period=MeetingRoom.getPeriod();%>
+			<% for(int i=0;i<period.length;i++){%>
+			<th><%= period[i] %></th>
+			<% }%>
 		</tr>
-		
-	<%	for(int i=0;i<rooms[].length;i++){%>
-	
+	<% RoomBean[] rooms=MeetingRoom.getRooms();%>
+	<%	for(int i=0;i<rooms.length;i++){%>
 		<tr>
-			<td><%= rooms[].getName() %></td>
+			<td><%= rooms[i].getName() %></td>
 			<% for(int j=0;j<period.length;j++){%>
 			<form action="<%= request.getContextPath() %>/ReserveCreateServlet" method="post">
-				<input type="hidden" name="roomId" value="<%= rooms[].getId() %>">
-				<td><input type="submit" name="time" value="<%= period[j]%>"></td>
+				<input type="hidden" name="roomId" value="${  rooms[i].Id }">
+				<td><input type="submit" name="time" value="${  period[j].Period}"></td>
 			</form>
 			<% }%>
 		</tr>

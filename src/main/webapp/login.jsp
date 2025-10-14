@@ -10,15 +10,15 @@
 	<h1>会議室予約</h1>
 	<hr>
 	<h2>ログイン</h2>
-	<form action="<%= request.getContextPath() %>/loginServlet" method="post">
+	<form action="<%= request.getContextPath() %>/LoginServlet" method="post">
 	<table>
 		<tr>
 		<td>利用者ID:</td>
-		<td><input type="text" name="userId"></td>
+		<td><input type="text" name="userId" required></td>
 		</tr>
 		<tr>
 		<td>パスワード:</td>
-		<td><input type="password" name="userPw"></td>
+		<td><input type="password" name="userPw" required></td>
 		</tr>
 	</table>
 		<input type="submit" value="ログイン">
