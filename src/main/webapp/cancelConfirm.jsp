@@ -14,19 +14,19 @@
 	<table>
 		<tr>
 			<td>予約日</td>
-			<td><%=reservation.date %></td>
+			<td>${reservation.date}</td>
 		</tr>
 		<tr>
 			<td>会議室</td>
-			<td><%=room.name %></td>
+			<td>${room.name}</td>
 		</tr>
 		<tr>
 			<td>予約時刻</td>
-			<td><%=reservation.start %>～<%=reservation.end %></td>
+			<td>${reservation.start}～${reservation.end}</td>
 		</tr>
 		<tr>
 			<td>予約者</td>
-			<td><%=meetingRoom.user.name %></td>
+			<td>${meetingRoom.user.name}</td>
 		</tr>
 	</table>
 	<hr>
