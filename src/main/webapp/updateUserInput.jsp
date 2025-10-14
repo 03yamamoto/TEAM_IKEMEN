@@ -7,10 +7,10 @@
 <title>新規ユーザー登録</title>
 </head>
 <body>
-	<h1>新規ユーザー登録内容</h1>
+	<h1>新規登録内容</h1>
 	<hr>
-
-	<form action="<%= request.getContextPath() %>/InputServlet" method="post">
+	
+	<form action="<%= request.getContextPath() %>/newuserServlet" method="post">
 	<table>
 		<tr>
 		<td>利用者ID:</td>
@@ -26,10 +26,10 @@
 		</tr>
 		<tr>
 		<td>住所(都道府県名):</td>
-		<td><input type="password" name="userAdd" required="required"></td>
+		<td><input type="password" name="userAddress" required="required"></td>
 		</tr>
 	</table>
-		<input type="submit" value="登録">
+		<input type="submit" value="ログイン">
 	</form>
 </body>
 </html>

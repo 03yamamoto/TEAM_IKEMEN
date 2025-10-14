@@ -4,34 +4,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>キャンセル確定画面</title>
+<title>登録成功</title>
 </head>
 <body>
-	<h1>会議室予約キャンセル</h1>
+	<h1>登録に成功しました</h1>
 	<hr>
-	<h2>キャンセル完了</h2>
-	
 	<table>
 		<tr>
-			<td>予約日</td>
-			<td>${reservation.date}</td>
+			<td>利用者ID</td>
+			<td>${sessionScope.id}</td>
 		</tr>
 		<tr>
-			<td>会議室</td>
-			<td>${room.name}</td>
+			<td>パスワード</td>
+			<td>${sessionScope.pass}</td>
 		</tr>
 		<tr>
-			<td>予約時刻</td>
-			<td>${reservation.start}～${reservation.end}</td>
+			<td>利用者名</td>
+			<td>${sessionScope.name}</td>
 		</tr>
 		<tr>
-			<td>予約者</td>
-			<td>${meetingRoom.user.name}</td>
+			<td>住所</td>
+			<td>${sessionScope.add}</td>
 		</tr>
 	</table>
 	<hr>
-	<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
-		<input type="submit" value="完了">
+	<form action="<%=request.getContextPath() %>/login.jsp" method="post">
+		<input type="submit" value="戻る">
 	</form>	
 	
 </body>
