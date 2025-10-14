@@ -23,5 +23,9 @@
 	</table>
 		<input type="submit" value="ログイン">
 	</form>
+	
+	<form action="<%= request.getContextPath() %>/newUserInput.jsp" method="post">
+		<input type="submit" value="新規登録">
+	</form>
 </body>
 </html>
