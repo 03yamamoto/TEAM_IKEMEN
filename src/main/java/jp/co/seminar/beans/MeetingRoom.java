@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.seminar.dao.ReservationDao;
 import jp.co.seminar.dao.RoomDao;
 import jp.co.seminar.dao.UserDao;
+import jp.co.seminar.util.RoomList;
 
 public class MeetingRoom implements Serializable {
 
@@ -28,13 +29,13 @@ public class MeetingRoom implements Serializable {
 
 	//メソッド
 	//会議室予約情報で会議室の予約をキャンセルする
-	public void cancel(ReservationBean reservation) {
+	public void cancel(ReservationBean reservation) throws Exception {
 		//予約情報が入っているかの確認
 		if (reservation == null) {
 			throw new Exception("キャンセルする予約情報がありません");
 		}
 		//キャンセル処理 あとは現在日時より予約日時が上回った場合の例外処理
-		if (!(ReservationDao.delete(reservation))) {
+		if (!(ReservationDao.delete​(reservation))) {
 			throw new Exception("この予約はすでにキャンセルされています。");
 		}
 		// 現在日時を取得
@@ -83,7 +84,7 @@ public class MeetingRoom implements Serializable {
 	    ReservationBean[][] result = new ReservationBean[rooms.length][period.length];
 
 	    // 利用日の予約一覧を取得
-	    List<ReservationBean> reservationDate = ReservationDao.findByDate(getDate());
+	    List<ReservationBean> reservationDate = ReservationDao.findByDate​(getDate());
 
 	    for (int i = 0; i < rooms.length; i++) {
 	        String roomId = rooms[i].getId();
@@ -104,7 +105,7 @@ public class MeetingRoom implements Serializable {
 
 	//会議室IDがroomIdの会議室を返す
 	public RoomBean getRoom(String roomId) {
-	    RoomBean[] rooms = RoomDao.findAll();
+	    RoomList rooms = RoomDao.findAll​();
 	    if (rooms != null) {
 	        for (RoomBean room : rooms) {
 	            if (room.getId().equals(roomId)) {
@@ -128,7 +129,7 @@ public class MeetingRoom implements Serializable {
 
 	//会議室予約システムにログインしているかの結果を返す
 	public boolean login(String id, String password) {
-		UserBean roomLogin = UserDao.certificate(id, password);
+		UserBean roomLogin = UserDao.certificate​(id, password);
 		if (roomLogin != null) {
 			return true;
 		}

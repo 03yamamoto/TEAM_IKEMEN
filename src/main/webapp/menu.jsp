@@ -22,7 +22,7 @@
 				<td><input type="submit" value="予約キャンセル"></td>
 			</tr>
 		</form>
-		<form action="<%= request.getContextPath() %>/logoutServlet" method="post">
+		<form action="<%= request.getContextPath() %>/LogoutServlet" method="post">
 			<tr>
 				<td><input type="submit" value="ログアウト"></td>
 			</tr>
