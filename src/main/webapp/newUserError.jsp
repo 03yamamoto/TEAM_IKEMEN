@@ -9,7 +9,6 @@
 <body>
 	<h1>登録に失敗しました</h1>
 	<hr>
-	<hr>
 	<form action="<%=request.getContextPath() %>/newUserInput.jsp" method="post">
 		<input type="submit" value="戻る">
 	</form>	

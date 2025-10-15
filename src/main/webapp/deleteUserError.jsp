@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>修正失敗</title>
+<title>退会失敗</title>
 </head>
 <body>
-	<h1>修正に失敗しました</h1>
+	<h1>退会に失敗しました</h1>
 	<hr>
-	<form action="<%=request.getContextPath() %>/updateUserInput.jsp" method="post">
+	<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
 		<input type="submit" value="戻る">
 	</form>	
 	

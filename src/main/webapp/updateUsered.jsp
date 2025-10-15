@@ -4,38 +4,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>予約確定画面</title>
+<title>修正成功</title>
 </head>
 <body>
-	<h1>会議室予約</h1>
+	<h1>修正に成功しました</h1>
 	<hr>
-	<h2>予約完了</h2>
-	
 	<table>
 		<tr>
-			<td>予約ID</td>
-			<td>${reservation.id}</td>
+			<td>利用者ID:</td>
+			<td>${updateuser.id}</td>
 		</tr>
 		<tr>
-			<td>予約日</td>
-			<td>${reservation.date}</td>
+			<td>パスワード:</td>
+			<td>${updateuser.pass}</td>
 		</tr>
 		<tr>
-			<td>会議室</td>
-			<td>${room.name}</td>
+			<td>利用者名:</td>
+			<td>${updateuser.name}</td>
 		</tr>
 		<tr>
-			<td>予約時刻</td>
-			<td>${reservation.start}～${reservation.end}</td>
-		</tr>
-		<tr>
-			<td>予約者</td>
-			<td>${meetingRoom.user.name}</td>
+			<td>住所:</td>
+			<td>${updateuser.add}</td>
 		</tr>
 	</table>
 	<hr>
-	<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
-		<input type="submit" value="完了">
+	<form action="<%=request.getContextPath() %>/login.jsp" method="post">
+		<input type="submit" value="戻る">
 	</form>	
 	
 </body>

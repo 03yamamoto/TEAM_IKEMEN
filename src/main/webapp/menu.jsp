@@ -22,9 +22,19 @@
 				<td><input type="submit" value="予約キャンセル"></td>
 			</tr>
 		</form>
+		<form action="<%= request.getContextPath() %>/updateUserInput.jsp" method="post">
+			<tr>
+				<td><input type="submit" value="登録情報修正"></td>
+			</tr>
+		</form>
 		<form action="<%= request.getContextPath() %>/LogoutServlet" method="post">
 			<tr>
 				<td><input type="submit" value="ログアウト"></td>
+			</tr>
+		</form>
+		<form action="<%= request.getContextPath() %>/deleteUserInput.jsp" method="post">
+			<tr>
+				<td><input type="submit" value="退会"></td>
 			</tr>
 		</form>
 	</table>
