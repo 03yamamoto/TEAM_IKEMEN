@@ -129,8 +129,8 @@ public class MeetingRoom implements Serializable {
 
 	//会議室予約システムにログインしているかの結果を返す
 	public boolean login(String id, String password) {
-		UserBean roomLogin = UserDao.certificate​(id, password);
-		if (roomLogin != null) {
+		this.user = UserDao.certificate​(id, password);
+		if (user != null) {
 			return true;
 		}
 		return false;
