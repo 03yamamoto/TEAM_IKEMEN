@@ -24,9 +24,9 @@ public class MeetingRoom implements Serializable {
 	/**直列化用バージョン番号*/
 	private static final long serialVersionUID = 1L;
 	/**利用時間(分)60分とする*/
-	private static int INTERVAL = 60;
+	private static final int INTERVAL = 60;
 	/**利用時間帯(開始時刻) ("09:00", "10:00", "11:00", "12:00","13:00", "14:00", "15:00", "16:00")*/
-	private static String[] PERIOD = { "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00" };
+	private static final String[] PERIOD = { "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00" };
 	/**利用日*/
 	private String date;
 	/**会議室*/
@@ -55,10 +55,6 @@ public class MeetingRoom implements Serializable {
 		if (reservation == null) {
 			throw new Exception("キャンセルする予約情報がありません");
 		}
-		//キャンセル処理 あとは現在日時より予約日時が上回った場合の例外処理
-		if (!(ReservationDao.delete​(reservation))) {
-			throw new Exception("この予約はすでにキャンセルされています。");
-		}
 		// 現在日時を取得
 		LocalDateTime nowTime = LocalDateTime.now();
 		// 予約日時を組み立てる
@@ -67,7 +63,10 @@ public class MeetingRoom implements Serializable {
 		if (reservationDateTime.isBefore(nowTime)) {
 			throw new Exception("過去の予約はキャンセルできません。");
 		}
-
+		//現在日時より予約日時が上回った場合の例外処理
+				if (!(ReservationDao.delete​(reservation))) {
+					throw new Exception("この予約はすでにキャンセルされています。");
+				}
 	}
 
 	/**
@@ -213,16 +212,23 @@ public class MeetingRoom implements Serializable {
 	 *   <li>現在時刻が予約時間を過ぎている場合: "時刻が過ぎているため予約できません"</li>
 	 * </ul>
 	 */
-	public void reserve(ReservationBean reservation) {
-		boolean success = ReservationDao.insert(reservation); // ReservationDaoがクラス名の例
+	public void reserve(ReservationBean reservation) throws Exception {
+	    LocalDateTime now = LocalDateTime.now();
+	    LocalDateTime reservationTime = LocalDateTime.parse(
+	        reservation.getDate() + "T" + reservation.getStart());
 
-		if (success) {
-			System.out.println("予約が追加されました！");
-		} else {
-			System.out.println("予約の追加に失敗しました！");
-		}
+	    if (reservationTime.isBefore(now)) {
+	        throw new Exception("時刻が過ぎているため予約できません");
+	    }
+
+	    boolean success = ReservationDao.insert(reservation);
+	    if (success) {
+	        System.out.println("予約が追加されました！");
+	    } else {
+	        throw new Exception("既に予約されています");
+	    }
 	}
-
+	
 	/**
 	 * 指定された会議室IDに対応する会議室の配列添字を返します。
 	 *
@@ -232,7 +238,7 @@ public class MeetingRoom implements Serializable {
 	 */
 	private int roomIndex(String roomId) {
 		for (int i = 0; i < rooms.length; i++) {
-			if (rooms[i].equals(roomId)) {
+			if (rooms[i].getId().equals(roomId))  {
 				return i;
 			}
 		}
