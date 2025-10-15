@@ -2,16 +2,15 @@ package jp.co.seminar.beans;
 
 import java.io.Serializable;
 
+/**
+ * 利用者の情報を管理するクラスです。
+ *
+ * <p><strong>バージョン:</strong> 1.0.1</p>
+ * <p><strong>作成者:</strong> 佐藤　智喜</p>
+ * <p><strong>関連項目:</strong> 直列化された形式</p>
+ */
 public class UserBean implements Serializable {
 
-	/**
-	 * <br>
-	 * 利用者の情報<br>
-	 * 
-	 * @author 佐藤　智喜
-	 * @version 1.0.1
-	 */
-	
 	//フィールド
 	/**直列化用バージョン番号*/
 	private static final long serialVersionUID = 1L;
@@ -28,21 +27,22 @@ public class UserBean implements Serializable {
 	/**直列化復元時に使用します*/
 	public UserBean() {
 	}
-	
+
+	/**
+	 * 利用者情報を基に初期化します。
+	 *
+	 * @param id 利用者ID
+	 * @param password パスワード
+	 * @param name 氏名
+	 * @param address 住所
+	 */
 	public UserBean(String id, String password, String name, String address) {
-		/**
-		 * 利用者情報を基に初期化します。
-		 *
-		 * @param id 利用者ID
-		 * @param password パスワード
-		 * @param name 氏名
-		 * @param address 住所
-		 */
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.address = address;
 	}
+
 	//メソッド
 	/**
 	 * 住所を返します。
@@ -52,7 +52,7 @@ public class UserBean implements Serializable {
 	public String getAddress() {
 		return address;
 	}
-	
+
 	/**
 	 * 利用者IDを返します。
 	 *
@@ -61,7 +61,7 @@ public class UserBean implements Serializable {
 	public String getId() {
 		return id;
 	}
-	
+
 	/**
 	 * 氏名を返します。
 	 *
@@ -70,7 +70,7 @@ public class UserBean implements Serializable {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * パスワードを返します。
 	 *
@@ -87,11 +87,17 @@ public class UserBean implements Serializable {
 	 * @return 新規ユーザー
 	 */
 	public boolean newUser() {
-		
+
 		return newUser;
 	}
-	
+
 	//デバッグ用ToString
+	/**
+	 * このオブジェクトの文字列表現を返します。
+	 * デバック用
+	 *
+	 * @return 利用者の文字列表現
+	 */
 	@Override
 	public String toString() {
 		return "アドレス:" + address + "\nID:" + id + "\n名前:" + name + "\nパスワード:" + password;

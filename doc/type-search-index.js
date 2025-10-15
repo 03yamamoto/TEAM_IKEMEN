@@ -1,1 +1,1 @@
-typeSearchIndex = [{"p":"jp.co.seminar.beans","l":"UserBean"},{"l":"すべてのクラスおよびインタフェース","u":"allclasses-index.html"}];updateSearchResults();
+typeSearchIndex = [{"p":"jp.co.seminar.beans","l":"MeetingRoom"},{"p":"jp.co.seminar.beans","l":"ReservationBean"},{"p":"jp.co.seminar.beans","l":"RoomBean"},{"p":"jp.co.seminar.beans","l":"UserBean"},{"l":"すべてのクラスおよびインタフェース","u":"allclasses-index.html"}];updateSearchResults();
