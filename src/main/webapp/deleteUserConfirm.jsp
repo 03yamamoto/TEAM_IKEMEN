@@ -4,31 +4,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>登録成功</title>
+<title>退会ユーザー確認</title>
 </head>
 <body>
-	<h1>登録に成功しました</h1>
+	<h1>退会ユーザー確認</h1>
 	<hr>
 	<table>
 		<tr>
 			<td>利用者ID:</td>
-			<td>${newuser.id}</td>
+			<td>${sessionScope.id}</td>
 		</tr>
 		<tr>
 			<td>パスワード:</td>
-			<td>${newuser.password}</td>
+			<td>${sessionScope.pass}</td>
 		</tr>
 		<tr>
 			<td>利用者名:</td>
-			<td>${newuser.name}</td>
+			<td>${sessionScope.name}</td>
 		</tr>
 		<tr>
 			<td>住所:</td>
-			<td>${newuser.address}</td>
+			<td>${sessionScope.add}</td>
 		</tr>
 	</table>
 	<hr>
-	<form action="<%=request.getContextPath() %>/login.jsp" method="post">
+	<form action="<%=request.getContextPath() %>/DeleteServlet" method="post">
+		<input type="submit" value="退会">
+	</form>	
+	<hr>
+	<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
 		<input type="submit" value="戻る">
 	</form>	
 	

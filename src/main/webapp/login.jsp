@@ -9,7 +9,6 @@
 <body>
 	<h1>会議室予約</h1>
 	<hr>
-	<h2>ログイン</h2>
 	<form action="<%= request.getContextPath() %>/LoginServlet" method="post">
 	<table>
 		<tr>
