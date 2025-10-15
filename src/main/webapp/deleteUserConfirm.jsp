@@ -31,7 +31,6 @@
 	<form action="<%=request.getContextPath() %>/DeleteServlet" method="post">
 		<input type="submit" value="退会">
 	</form>	
-	<hr>
 	<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
 		<input type="submit" value="戻る">
 	</form>	
