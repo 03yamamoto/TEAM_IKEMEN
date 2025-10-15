@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>新規ユーザー登録</title>
+<link rel = "stylesheet" href = "css/stylesheet.css">
 </head>
 <body>
 	<h1>新規ユーザー登録内容</h1>

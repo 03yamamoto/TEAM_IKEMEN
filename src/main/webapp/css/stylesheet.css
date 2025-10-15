@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+/* 全てのページに適用される設定 */
+
+*{
+	background-color: azure;
+	color: black;
+	font-family: sans-serif;
+	text-align: center;
+	line-height: 1.7;
+}
+body{
+	margin: 90px auto 90px auto;
+	max-width: 1000px;
+}

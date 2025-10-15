@@ -9,24 +9,23 @@
 <body>
 	<h1>ユーザー登録情報修正</h1>
 	<hr>
-	
 	<form action="<%= request.getContextPath() %>/UpdateServlet" method="post">
 	<table>
 		<tr>
 		<td>利用者ID:</td>
-		<td><input type="text" name="userId" value="${sessionScope.id}" required></td>
+		<td><input type="text" name="userId" value="${newuser.id}" required></td>
 		</tr>
 		<tr>
 		<td>パスワード:</td>
-		<td><input type="text" name="userPw" value="${sessionScope.pass}" required></td>
+		<td><input type="text" name="userPw" value="${newuser.pass}" required></td>
 		</tr>
 		<tr>
 		<td>利用者名:</td>
-		<td><input type="text" name="userName" value="${sessionScope.name}" required></td>
+		<td><input type="text" name="userName" value="${newuser.name}" required></td>
 		</tr>
 		<tr>
 		<td>住所(都道府県名):</td>
-		<td><input type="text" name="userAdd" value="${sessionScope.add}" required></td>
+		<td><input type="text" name="userAdd" value="${newuser.add}" required></td>
 		</tr>
 	</table>
 		<input type="submit" value="修正">
