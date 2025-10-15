@@ -26,6 +26,7 @@ public class UserDao {
 			pstmt.setString(2, password);
 			//SQL文を実行して結果を取得
 			try(ResultSet rs = pstmt.executeQuery()){
+				rs.next();
 				String idd = rs.getString("id");
 				String pass = rs.getString("password");
 				String name = rs.getString("name");
