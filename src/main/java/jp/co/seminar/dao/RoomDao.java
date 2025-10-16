@@ -28,8 +28,8 @@ public class RoomDao {
 				rs.getString("id"),
 				rs.getString("name"));
 				rlist.add(rbean);
-	}
-}
+				}
+			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("ドライバが見つかりません");

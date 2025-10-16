@@ -33,7 +33,7 @@
 	<form action="<%=request.getContextPath() %>/reserveInput.jsp" method="post">
 		<input type="submit" value="戻る">
 	</form>	
-	<form action="<%=request.getContextPath() %>/reserveServlet" method="post">
+	<form action="<%=request.getContextPath() %>/ReserveServlet" method="post">
 		<input type="submit" value="決定">
 	</form>	
 	
