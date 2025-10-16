@@ -5,13 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>退会失敗</title>
+<link rel = "stylesheet" href = "css/stylesheet.css">
 </head>
 <body>
-	<h1>退会に失敗しました</h1>
+<header>
+	<h1>退会失敗しました(＾ω＾)</h1>
 	<hr>
+</header>
+<main>
 	<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
-		<input type="submit" value="戻る">
+		<input id = "submit" type="submit" value="戻る">
 	</form>	
-	
+</main>
+<footer>
+
+</footer>	
 </body>
 </html>

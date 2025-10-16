@@ -32,12 +32,16 @@
 		<td><input type="text" name="userAdd" required></td>
 		</tr>
 		<tr><td></td>
-		<td><input id ="submit" type="submit" value="登録"></td>
+		<td>
+		<input id ="submit" type="submit" value="登録">
+		</td>
 		</tr>
 	</form>
 		<tr><td></td>
+		<td>
 	<form action="<%=request.getContextPath() %>/login.jsp" method="post">
-		<td><input id ="submit" type="submit" value="戻る"></td>
+		<input id ="submit" type="submit" value="戻る">
+		</td>
 		</tr>
 	</form>
 	</table>
