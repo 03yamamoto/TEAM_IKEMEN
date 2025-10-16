@@ -1,15 +1,29 @@
 @charset "UTF-8";
 
-/* 全てのページに適用される設定 */
-
 *{
-	background-color: azure;
+	background-color: aliceblue;
 	color: black;
+}
+
+table{
+	line-height: 1.5;
+}
+
+body{
+	margin: 90px auto;
+	max-width: 400px;
+}
+
+header{
 	font-family: sans-serif;
 	text-align: center;
-	line-height: 1.7;
 }
-body{
-	margin: 90px auto 90px auto;
-	max-width: 1000px;
+
+input{
+	background-color: white;
+}
+
+#submit:hover{
+	opacity: 0.5;
+	border-radius: 8px;
 }
