@@ -5,13 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>登録失敗</title>
+<link rel = "stylesheet" href = "css/stylesheet.css">
 </head>
 <body>
+<header>
 	<h1>登録に失敗しました</h1>
 	<hr>
+</header>
+<main>
 	<form action="<%=request.getContextPath() %>/newUserInput.jsp" method="post">
-		<input type="submit" value="戻る">
+		<input id = "submit" type="submit" value="戻る">
 	</form>	
-	
+</main>
+<footer>
+
+</footer>
 </body>
 </html>

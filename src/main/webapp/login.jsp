@@ -5,10 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン画面</title>
+<link rel = "stylesheet" href = "css/stylesheet.css">
 </head>
 <body>
+<header>
 	<h1>会議室予約</h1>
 	<hr>
+</header>
+<main>
 	<form action="<%= request.getContextPath() %>/LoginServlet" method="post">
 	<table>
 		<tr>
@@ -19,12 +23,21 @@
 		<td>パスワード:</td>
 		<td><input type="password" name="userPw" required></td>
 		</tr>
-	</table>
-		<input type="submit" value="ログイン">
+		<tr><td></td>
+		<td>
+		<input id = "submit" type="submit" value="ログイン">
+		</td>
+		</tr>
 	</form>
-	
+
+		<tr><td></td>
+		<td>
 	<form action="<%= request.getContextPath() %>/newUserInput.jsp" method="post">
-		<input type="submit" value="新規登録">
+		<input id = "submit" type="submit" value="新規登録">
+		</td>
+		</tr>
 	</form>
+	</table>
+</main>
 </body>
 </html>

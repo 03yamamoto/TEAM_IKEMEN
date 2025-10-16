@@ -5,12 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>予約確認画面</title>
+<link rel = "stylesheet" href = "css/stylesheet.css">
 </head>
 <body>
+<header>
 	<h1>会議室予約</h1>
 	<hr>
 	<h2>予約確認</h2>
-	
+</header>
+<main>
 	<table>
 		<tr>
 			<td>予約日</td>
@@ -28,14 +31,25 @@
 			<td>予約者</td>
 			<td>${meetingRoom.user.name}</td>
 		</tr>
-	</table>
 	<hr>
+		<tr><td></td>
+		<td>
 	<form action="<%=request.getContextPath() %>/reserveInput.jsp" method="post">
-		<input type="submit" value="戻る">
+		<input id ="submit" type="submit" value="戻る">
+		</td>
+		</tr>
 	</form>	
+		<tr><td></td>
+		<td>
 	<form action="<%=request.getContextPath() %>/ReserveServlet" method="post">
-		<input type="submit" value="決定">
-	</form>	
-	
+		<input id ="submit" type="submit" value="決定">
+		</td>
+		</tr>
+	</form>
+	</table>
+</main>	
+<footer>
+
+</footer>
 </body>
 </html>

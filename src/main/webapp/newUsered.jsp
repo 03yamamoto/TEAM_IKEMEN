@@ -5,10 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>登録成功</title>
+<link rel = "stylesheet" href = "css/stylesheet.css">
 </head>
 <body>
+<header>
 	<h1>登録に成功しました</h1>
 	<hr>
+</header>
+<main>
 	<table>
 		<tr>
 			<td>利用者ID:</td>
@@ -26,11 +30,17 @@
 			<td>住所:</td>
 			<td>${newuser.address}</td>
 		</tr>
-	</table>
-	<hr>
+		<tr><td></td>
+		<td>
 	<form action="<%=request.getContextPath() %>/login.jsp" method="post">
-		<input type="submit" value="戻る">
+		<input id = "submit" type="submit" value="戻る">
+		</td>
+		</tr>
 	</form>	
-	
+	</table>
+</main>
+<footer>
+
+</footer>
 </body>
 </html>

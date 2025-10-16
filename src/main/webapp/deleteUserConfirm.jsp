@@ -5,10 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>退会ユーザー確認</title>
+<link rel = "stylesheet" href = "css/stylesheet.css">
 </head>
 <body>
+<header>
 	<h1>退会ユーザー確認</h1>
 	<hr>
+</header>
+<main>
 	<table>
 		<tr>
 			<td>利用者ID:</td>
@@ -26,14 +30,26 @@
 			<td>住所:</td>
 			<td>${sessionScope.add}</td>
 		</tr>
+		
+		<tr><td></td>
+		<td>
+		<form action="<%=request.getContextPath() %>/DeleteServlet" method="post">
+		<input id = "submit" type="submit" value="退会">
+		</td>
+		</form>	
+		</tr>
+		
+		<tr><td></td>
+		<td>
+		<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
+		<input id = "submit" type="submit" value="戻る">
+		</td>
+		</form>	
+		</tr>
 	</table>
-	<hr>
-	<form action="<%=request.getContextPath() %>/DeleteServlet" method="post">
-		<input type="submit" value="退会">
-	</form>	
-	<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
-		<input type="submit" value="戻る">
-	</form>	
-	
+</main>
+<footer>
+
+</footer>
 </body>
 </html>

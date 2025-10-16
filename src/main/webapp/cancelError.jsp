@@ -5,12 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>予約エラー画面</title>
+<link rel = "stylesheet" href = "css/stylesheet.css">
 </head>
 <body>
+<header>
 	<h1>会議室予約キャンセル</h1>
 	<hr>
 	<h2>キャンセルエラー</h2>
 	<p>${errorReason}</p>
+</header>
+<main>
 	<table>
 		<tr>
 			<td>予約日</td>
@@ -28,11 +32,18 @@
 			<td>予約者</td>
 			<td>${meetingRoom.user.name}</td>
 		</tr>
+
+		<tr><td></td>
+		<td>
+		<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
+		<input id = "submit" type="submit" value="確認">
+		</td>
+		</form>	
+		</tr>
 	</table>
-	<hr>
-	<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
-		<input type="submit" value="確認">
-	</form>	
-	
+</main>
+<footer>
+
+</footer>
 </body>
 </html>
