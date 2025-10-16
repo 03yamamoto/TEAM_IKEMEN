@@ -50,7 +50,7 @@ public class ReserveServlet extends HttpServlet {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
 			errorReason = e.getMessage();
-			nextPage = "/reserverror.jsp";
+			nextPage = "/reserveError.jsp";
 		}
 		request.setAttribute("errorReason", errorReason);
 		RequestDispatcher rd = request.getRequestDispatcher(nextPage);

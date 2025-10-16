@@ -43,25 +43,25 @@ public class ReserveCreateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String nextPage;
-		try {
+//		try {
 		String roomId = request.getParameter("roomId");
 		String time = request.getParameter("time");
 		MeetingRoom meetingroom = (MeetingRoom) session.getAttribute("meetingroom");
-		RoomBean roomBean = meetingroom.getroom(roomId);
+		RoomBean roomBean = meetingroom.getRoom(roomId);
 		ReservationBean resevationBean = meetingroom.createReservation(roomId,time);
 			session.setAttribute("room", roomBean);
 			session.setAttribute("resevation", resevationBean);
-			nextPage = request.getContextPath() + "/reseved.jsp";
-		}catch (ServletException e) {
-			e.printStackTrace();
-			System.err.println("リクエスト処理エラー");
-			nextPage = request.getContextPath() + "/reseved.jsp";
-			
-		}catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("入出力処理エラー");
-			nextPage = request.getContextPath() + "/reseved.jsp";
-		}
+			nextPage = request.getContextPath() + "/reserveConfirm.jsp";
+//		}catch (ServletException e) {
+//			e.printStackTrace();
+//			System.err.println("リクエスト処理エラー");
+//			nextPage = request.getContextPath() + "/reseved.jsp";
+//			
+//		}catch (IOException e) {
+//			e.printStackTrace();
+//			System.err.println("入出力処理エラー");
+//			nextPage = request.getContextPath() + "/reseved.jsp";
+//		}
 		response.sendRedirect(nextPage);
 		return;
 	}

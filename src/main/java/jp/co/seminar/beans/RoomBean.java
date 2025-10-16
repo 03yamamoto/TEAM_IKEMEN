@@ -31,8 +31,8 @@ public class RoomBean implements Serializable {
 	 * @param name 会議室名
 	 */
 	public RoomBean(String id, String name) {
-		id = id;
-		name = name;
+		this.id = id;
+		this.name = name;
 	}
 
 	//メソッド
