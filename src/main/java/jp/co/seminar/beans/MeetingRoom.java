@@ -1,9 +1,11 @@
 package jp.co.seminar.beans;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.List;
 
 import jp.co.seminar.dao.ReservationDao;
@@ -30,13 +32,19 @@ public class MeetingRoom implements Serializable {
 	/**利用日*/
 	private String date;
 	/**会議室*/
-	private RoomBean[] rooms;
+	private RoomList rooms;
 	/**利用者*/
 	private UserBean user;
 
 	//コンストラクタ 
 	/**生成 会議室予約システムを初期化します。*/
 	public MeetingRoom() {
+		this.rooms = RoomDao.findAll​();
+		 Calendar cl = Calendar.getInstance();
+		 
+	     // SimpleDateFormatクラスを使用して、パターンを設定する
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    	 this.date = sdf.format(cl.getTime());
 	}
 
 	//メソッド
@@ -126,15 +134,15 @@ public class MeetingRoom implements Serializable {
 	 * @return 会議室・時間帯ごとの予約状況
 	 */
 	public ReservationBean[][] getReservations() {
-		RoomBean[] rooms = getRooms(); // 会議室一覧
+		RoomList rooms = getRooms(); // 会議室一覧
 		String[] period = getPeriod(); // 時間帯一覧
-		ReservationBean[][] result = new ReservationBean[rooms.length][period.length];
+		ReservationBean[][] result = new ReservationBean[rooms.size()][period.length];
 
 		// 利用日の予約一覧を取得
 		List<ReservationBean> reservationDate = ReservationDao.findByDate​(getDate());
 
-		for (int i = 0; i < rooms.length; i++) {
-			String roomId = rooms[i].getId();
+		for (int i = 0; i < rooms.size(); i++) {
+			String roomId = rooms.get(i).getId();
 			for (int j = 0; j < period.length; j++) {
 				String start = period[j];
 				for (ReservationBean resavationList : reservationDate) {
@@ -174,7 +182,7 @@ public class MeetingRoom implements Serializable {
 	 *
 	 * @return 会議室の配列
 	 */
-	public RoomBean[] getRooms() {
+	public RoomList getRooms() {
 		return rooms;
 	}
 	
@@ -237,8 +245,8 @@ public class MeetingRoom implements Serializable {
 	 * @throws IndexOutOfBoundsException 会議室が存在しない場合
 	 */
 	private int roomIndex(String roomId) {
-		for (int i = 0; i < rooms.length; i++) {
-			if (rooms[i].getId().equals(roomId))  {
+		for (int i = 0; i < rooms.size(); i++) {
+			if (rooms.get(i).getId().equals(roomId))  {
 				return i;
 			}
 		}
