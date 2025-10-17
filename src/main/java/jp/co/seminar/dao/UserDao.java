@@ -12,11 +12,12 @@ import jp.co.seminar.util.MeetingroomConnectionProvider;
 public class UserDao {
 	//コンストラクタ
 	public UserDao() {}
-	//user検索メソッド
+
+	//ログイン時id,pass照合メソッド
 	public static UserBean certificate​(String id, String password) {
 		UserBean ubean =null;
 		//データベース接続
-		String sql = "SELECT * FROM user WHERE id = ? AND password = ?";
+		String sql = "SELECT * FROM user WHERE id = ? AND password = ? flag = 1";
 		//try-with-resources構文でリソースを自動的にクローズ
 		try(Connection conn = MeetingroomConnectionProvider.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -43,7 +44,34 @@ public class UserDao {
 		}
 		return ubean;
 }
-	
+
+	//新規登録時name,pass重複確認メソッド
+	public static boolean searchDuplication(String password, String name) {
+		//データベース接続
+		String sql = "SELECT * FROM user WHERE name = ? AND password = ?";
+		//try-with-resources構文でリソースを自動的にクローズ
+		try(Connection conn = MeetingroomConnectionProvider.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql)){
+			//プレースホルダーに値を設定
+			pstmt.setString(1, password);
+			pstmt.setString(2, name);
+			//SQL文を実行して結果を取得
+			try(ResultSet rs = pstmt.executeQuery()){
+				boolean result = rs.next();
+				return result;
+			}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				System.out.println("ドライバが見つかりません");
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("SQLに関するエラーです。");
+			}
+			return false;
+		
+}
+
+	//利用者IDを自動で決めるメソッド(西暦2桁+連番5桁)
 	public static String maxId() throws ClassNotFoundException, SQLException{
 		//データベース接続
 		String sql = "SELECT MAX(id) FROM user WHERE id LIKE ?";
@@ -57,22 +85,22 @@ public class UserDao {
 		//SQL文を実行して結果を取得
 			try (ResultSet rs = pstmt.executeQuery()){
 				if (rs.next()) {
-					String maxId = rs.getString(1);
+					String maxId = rs.getString("MAX(id)");
 					int nextNumber = 1;
 					if (maxId != null) {
 						nextNumber = Integer.parseInt(maxId.substring(2)) + 1;
 					}
-					return year + String.format("%04d", nextNumber); // 例: "250001"
+					return year + String.format("%05d", nextNumber); // 例: "00001"
 				}
 			}
-			return year + "0001"; // 初IDならこれ！
+			return year + "00001"; // 初IDならこれ！
 		}
 	}
-	
+
 	//新規登録メソッド※追加要件
-	public static boolean newuser(UserBean newuser) {
+	public static boolean newUser(UserBean newuser) {
 		//データベース接続
-		String sql = "INSERT INTO user (id,password,name,address) VALUES ('?', '?', '?', '?')";
+		String sql = "INSERT INTO user (id,password,name,address,flag) VALUES (?, ?, ?, ?,1)";
 		//try-with-resources構文でリソースを自動的にクローズ
 		try(
 			Connection conn = MeetingroomConnectionProvider.getConnection();
@@ -95,22 +123,20 @@ public class UserDao {
 		return false;
 }
 	//登録情報修正メソッド※追加要件
-	public static boolean updateuser(UserBean before, UserBean after) {
+	public static boolean updateUser(UserBean before, UserBean after) {
 		//データベース接続
-		String sql = "UPDATE user SET id = ?, password = ?, name = ?, address = ? WHERE id = ? AND password = ? AND name = ? AND address = ?";
+		String sql = "UPDATE user SET password = ?, name = ?, address = ? WHERE id AND password = ? AND name = ? AND address = ?";
 		//try-with-resources構文でリソースを自動的にクローズ
 		try(
 			Connection conn = MeetingroomConnectionProvider.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql)){
 			//プレースホルダーに値を設定
-			pstmt.setString(1, after.getId());
-			pstmt.setString(2, after.getPassword());
-			pstmt.setString(3, after.getName());
-			pstmt.setString(4, after.getAddress());
-			pstmt.setString(5, before.getId());
-			pstmt.setString(6, before.getPassword());
-			pstmt.setString(7, before.getName());
-			pstmt.setString(8, before.getAddress());
+			pstmt.setString(1, after.getPassword());
+			pstmt.setString(2, after.getName());
+			pstmt.setString(3, after.getAddress());
+			pstmt.setString(4, before.getPassword());
+			pstmt.setString(5, before.getName());
+			pstmt.setString(6, before.getAddress());
 			//SQL文を実行して結果を取得
 			int ret = pstmt.executeUpdate();
 			return ret != 0;
@@ -123,20 +149,20 @@ public class UserDao {
 		}
 		return false;
 }
+	
 	//登録情報削除メソッド※追加要件
-		public static boolean deleteuser(UserBean delete) {
+		public static boolean deleteUser(UserBean delete) {
 			//データベース接続
-			String sql = "UPDATE user SET flag = 1 WHERE id = ?, password = ?, name = ?, address = ? flag = ?";
+			String sql = "UPDATE user SET flag = 0 WHERE id = ?, password = ?, name = ?, address = ? flag = 1";
 			//try-with-resources構文でリソースを自動的にクローズ
 			try(
 				Connection conn = MeetingroomConnectionProvider.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql)){
 				//プレースホルダーに値を設定
-				pstmt.setString(1, delete.getId()+"");
-				pstmt.setString(2, delete.getPassword()+"");
-				pstmt.setString(3, delete.getName()+"");
-				pstmt.setString(4, delete.getAddress()+"");
-				pstmt.setString(5, delete.getId()+"");
+				pstmt.setString(1, delete.getId());
+				pstmt.setString(2, delete.getPassword());
+				pstmt.setString(3, delete.getName());
+				pstmt.setString(4, delete.getAddress());
 				//SQL文を実行して結果を取得
 				int ret = pstmt.executeUpdate();
 				return ret != 0;
@@ -149,6 +175,4 @@ public class UserDao {
 			}
 			return false;
 	}
-	
-
 }
