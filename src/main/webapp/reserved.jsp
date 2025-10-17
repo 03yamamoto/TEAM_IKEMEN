@@ -36,7 +36,6 @@
 			<td>${meetingRoom.user.name}</td>
 		</tr>
 	
-	<hr>
 		<tr><td></td>
 		<td>
 	<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
