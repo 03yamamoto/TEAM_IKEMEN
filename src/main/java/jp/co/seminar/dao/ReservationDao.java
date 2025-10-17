@@ -68,9 +68,9 @@ public class ReservationDao {
 		return mList;
 	}
 
-	public static boolean insert(ReservationBean reservation) {
+	public static boolean insert(ReservationBean reservation) {		
 		//データベース接続
-		String sql = "INSERT INTO reservation (roomId,date,start,end,userId,flag) VALUES (?,?,?,?,?,1)";
+		String sql = "INSERT INTO reservation (roomid,date,start,end,userid,flag) VALUES (?,?,?,?,?,1)";
 		//try-with-resources構文でリソースを自動的にクローズ
 		try(Connection conn = MeetingroomConnectionProvider.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql)){
