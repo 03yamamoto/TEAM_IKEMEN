@@ -126,7 +126,7 @@ public class MeetingRoom implements Serializable {
 	public static String[] getPeriod() {
 		return PERIOD;
 	}
-
+	
 	/**
 	 * 会議室予約システムの利用日における予約状況を返します。
 	 * 配列は会議室 × 時間帯の構成です。
@@ -270,6 +270,16 @@ public class MeetingRoom implements Serializable {
 		// 見つからなかった場合は例外を投げる
 		throw new IndexOutOfBoundsException("指定された時刻が時間帯に存在しません: " + start);
 	}
+	
+	private boolean beanUpdateUser(String name,String password,String adress) {
+			UserBean afterUser =new UserBean(name,password,adress);
+			boolean updateSccess =UserDao.updateUser(user, afterUser);
+			if(updateSccess) {
+				return true;
+			}
+				return false;
+		}
+	
 	
 	/**
 	 * このオブジェクトの文字列表現を返します。

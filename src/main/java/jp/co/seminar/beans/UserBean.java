@@ -53,16 +53,13 @@ public class UserBean implements Serializable {
 	 * @param password パスワード
 	 * @param name 氏名
 	 * @param address 住所
+	 * @throws SQLException SQLエラーが出た場合に例外を表示します
 	 */
-	public UserBean(String password, String name, String address) {
-		this.password = password;
-		this.name = name;
-		this.address = address;
-		try {
-			this.id = UserDao.maxId(); // 外部クラスからID生成！
-		} catch (SQLException e) {
-			System.out.println("SQLエラーです"); // エラー内容を表示
-		}
+	public UserBean(String password, String name, String address) throws SQLException, ClassNotFoundException {
+	    this.password = password;
+	    this.name = name;
+	    this.address = address;
+	    this.id = UserDao.maxId(); // 例外が発生する可能性あり！
 	}
 
 	//メソッド
@@ -102,15 +99,35 @@ public class UserBean implements Serializable {
 		return password;
 	}
 
-	//新規ユーザー登録
 	/**
-	 * 新規ユーザーを返します。
+	 * ユーザー情報をもとに新規ユーザーを登録します。
+	 * <p>
+	 * このメソッドは、IDとパスワードが一致する既存ユーザーが
+	 * データベースに存在するかを確認し、存在しない場合のみ新規登録を行います。
+	 * </p>
 	 *
-	 * @return 新規ユーザー
+	 * @return 登録に成功した場合はtrue、重複またはエラーが発生した場合はfalse
 	 */
-	public boolean newUser() {
+	public boolean beenNewUser() {
+		UserBean beenFieldNewUser = new UserBean(this.id, this.password, this.name, this.address);
 
-		return newUser;
+		try {
+			// 重複チェック（IDとパスワードが一致するユーザーがいるか）
+			boolean exists = UserDao.seachDuplication(beenFieldNewUser.getId(), beenFieldNewUser.getPassword());
+			if (exists) {
+				System.out.println("同じIDとパスワードのユーザーがすでに存在します！");
+				return false;
+			}
+
+			// 新規登録
+			boolean result = UserDao.newUser(beenFieldNewUser);
+			return true;
+
+		} catch (SQLException e) {
+			System.out.println("ユーザー登録中にエラーが発生しました");
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	//デバッグ用ToString
