@@ -1,6 +1,9 @@
 package jp.co.seminar.beans;
 
 import java.io.Serializable;
+import java.sql.SQLException;
+
+import jp.co.seminar.dao.UserDao;
 
 /**
  * 利用者の情報を管理するクラスです。
@@ -41,6 +44,25 @@ public class UserBean implements Serializable {
 		this.password = password;
 		this.name = name;
 		this.address = address;
+	}
+
+	/**
+	 * 新規ユーザーの情報を初期化します。
+	 *
+	 * @param id 利用者ID
+	 * @param password パスワード
+	 * @param name 氏名
+	 * @param address 住所
+	 */
+	public UserBean(String password, String name, String address) {
+		this.password = password;
+		this.name = name;
+		this.address = address;
+		try {
+			this.id = UserDao.maxId(); // 外部クラスからID生成！
+		} catch (SQLException e) {
+			System.out.println("SQLエラーです"); // エラー内容を表示
+		}
 	}
 
 	//メソッド
