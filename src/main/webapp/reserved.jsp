@@ -5,12 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>予約確定画面</title>
+<link rel = "stylesheet" href = "css/stylesheet.css">
 </head>
 <body>
+<header>
 	<h1>会議室予約</h1>
 	<hr>
 	<h2>予約完了</h2>
-	
+</header>
+<main>
 	<table>
 		<tr>
 			<td>予約ID</td>
@@ -32,11 +35,19 @@
 			<td>予約者</td>
 			<td>${meetingRoom.user.name}</td>
 		</tr>
-	</table>
-	<hr>
-	<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
-		<input type="submit" value="完了">
-	</form>	
 	
+	<hr>
+		<tr><td></td>
+		<td>
+	<form action="<%=request.getContextPath() %>/menu.jsp" method="post">
+		<input id ="submit" type="submit" value="完了">
+		</td>
+		</tr>
+	</form>	
+	</table>
+</main>
+<footer>
+
+</footer>
 </body>
 </html>

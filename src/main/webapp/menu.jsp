@@ -35,7 +35,7 @@
 				<td><input id = "submit" type="submit" value="ログアウト"></td>
 			</tr>
 		</form>
-		<form action="<%= request.getContextPath() %>/deleteUserInput.jsp" method="post">
+		<form action="<%= request.getContextPath() %>/deleteUserConfirm.jsp" method="post">
 			<tr>
 				<td><input id = "submit" type="submit" value="退会"></td>
 			</tr>
