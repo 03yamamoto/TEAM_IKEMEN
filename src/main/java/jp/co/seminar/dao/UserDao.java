@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import jp.co.seminar.beans.UserBean;
 import jp.co.seminar.util.MeetingroomConnectionProvider;
@@ -42,6 +43,31 @@ public class UserDao {
 		}
 		return ubean;
 }
+	
+	public static String maxId() throws ClassNotFoundException, SQLException{
+		//データベース接続
+		String sql = "SELECT MAX(id) FROM user WHERE id LIKE ?";
+		//try-with-resources構文でリソースを自動的にクローズ
+		try (
+			Connection conn = MeetingroomConnectionProvider.getConnection(); 
+			PreparedStatement pstmt = conn.prepareStatement(sql)){
+			String year = String.valueOf(LocalDate.now().getYear()).substring(2);
+		//プレースホルダーに値を設定
+			pstmt.setString(1, year + "%");
+		//SQL文を実行して結果を取得
+			try (ResultSet rs = pstmt.executeQuery()){
+				if (rs.next()) {
+					String maxId = rs.getString(1);
+					int nextNumber = 1;
+					if (maxId != null) {
+						nextNumber = Integer.parseInt(maxId.substring(2)) + 1;
+					}
+					return year + String.format("%04d", nextNumber); // 例: "250001"
+				}
+			}
+			return year + "0001"; // 初IDならこれ！
+		}
+	}
 	
 	//新規登録メソッド※追加要件
 	public static boolean newuser(UserBean newuser) {
@@ -124,4 +150,5 @@ public class UserDao {
 			return false;
 	}
 	
+
 }
