@@ -9,8 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>予約入力画面</title>
+<link rel = "stylesheet" href = "css/stylesheet.css">
 </head>
 <body>
+<header>
 	<h1>会議室予約</h1>
 	<hr>
 	<h2>利用日</h2>
@@ -21,6 +23,8 @@
 	</form>
 
 	<h2>予約可能時間帯（${meetingroom.user.name}）</h2>
+</header>
+<main>
 	<table>
 		<tr>
 			<th>会議室名/時間帯</th>
@@ -44,13 +48,19 @@
 			</form>
 			<% }%>
 		</tr>
-
 		<%	}%>
-	</table>
-
 	<hr>
+		<tr><td></td>
+		<td>
 	<form action="<%= request.getContextPath()%>/menu.jsp" method="post">
 		<input type="submit" value="戻る">
 	</form>
+		</td>
+		</tr>
+	</table>
+</main>
+<footer>
+
+</footer>
 </body>
 </html>
