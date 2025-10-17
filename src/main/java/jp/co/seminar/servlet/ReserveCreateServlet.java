@@ -49,8 +49,10 @@ public class ReserveCreateServlet extends HttpServlet {
 		MeetingRoom meetingroom = (MeetingRoom) session.getAttribute("meetingroom");
 		RoomBean roomBean = meetingroom.getRoom(roomId);
 		ReservationBean resevationBean = meetingroom.createReservation(roomId,time);
+		System.out.println(resevationBean);
+		System.out.println(roomBean);
 			session.setAttribute("room", roomBean);
-			session.setAttribute("resevation", resevationBean);
+			session.setAttribute("reservation", resevationBean);
 			nextPage = request.getContextPath() + "/reserveConfirm.jsp";
 //		}catch (ServletException e) {
 //			e.printStackTrace();

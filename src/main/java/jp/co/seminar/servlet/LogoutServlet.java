@@ -41,7 +41,6 @@ public class LogoutServlet extends HttpServlet {
 		String nextPage = request.getContextPath() + "/login.jsp";
 		response.sendRedirect(nextPage);
 		return;
-		
 	}
 
 }

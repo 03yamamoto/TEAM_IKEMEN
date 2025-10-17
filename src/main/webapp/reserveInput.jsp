@@ -43,7 +43,7 @@
 			<% for(int j=0;j<period.length;j++){%>
 			<form action="<%= request.getContextPath() %>/ReserveCreateServlet"
 				method="post">
-				<input type="hidden" name="roomId" value="${ rooms[i].id }">
+				<input type="hidden" name="roomId" value="<%= rooms.get(i).getId() %>">
 				<td><input type="submit" name="time" value="<%= period[j] %>"></td>
 			</form>
 			<% }%>

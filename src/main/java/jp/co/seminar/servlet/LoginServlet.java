@@ -50,10 +50,8 @@ public class LoginServlet extends HttpServlet {
 //		ログイン処理をMeetingroomのloginメソッドを用いて行う
 		if (meetingroom.login(userId,userPw)) {
 			HttpSession session = request.getSession();
-			if (session.isNew()) {
-				session.setMaxInactiveInterval(60 * 15);
-				session.setAttribute("meetingroom",meetingroom);
-			}
+			session.setMaxInactiveInterval(60 * 15);
+			session.setAttribute("meetingroom",meetingroom);
 			nextPage = request.getContextPath() + "/menu.jsp";
 		}else {
 			nextPage = request.getContextPath() + "/login.jsp";
