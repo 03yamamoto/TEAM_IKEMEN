@@ -30,7 +30,7 @@
 		</tr>
 		<tr>
 			<td>予約者</td>
-			<td>${meetingRoom.user.name}</td>
+			<td>${meetingroom.user.name}</td>
 		</tr>
 		<tr><td></td>
 		<td>
